@@ -46,27 +46,61 @@ try:
             GPIO.output(17,False)
             x = 0
             
-        # This code is for a button that needs to toggle on and off
+        # This code is for a button that has 4 states: all off, light1, light 2, both
         input_value = GPIO.input(24)
+        state = 0
+        
+        # variable state tells me the state of the light
+        # x is for debouncing
+        # x is also for telling me how long the button was pressed for debug, but can be removed for clarity
+        
         if input_value == False and x == 0:
             GPIO.output(17, True)
+            print('Light 1 should be on.')
             while input_value == False:
                 input_value = GPIO.input(24)
                 print('Button 3 is still pressed.')
-                print(x)
-                x +=1
-            print('The light should be on.')
-        elif input_value == False and x > 0:
-            x=0
+                print(x) #show me how many times this was executed
+                x +=1 #increment
+            x = 1 # go to next state on next loop
+            
+            
+        elif input_value == False and x == 1:
+            x=0 #reset so I can see how long button was pressed
             GPIO.output(17, False)
-            print('The light should be off')
+            GPIO.output(22, True)
+            print('Light 2 should be on')
+            while input_value == False:
+                input_value = GPIO.input(24)
+                print('Button 3 is still pressed')
+                print(x)
+                x+=1
+            x=2 #go to next state on next loop
+            
+        elif input_value == False and x == 2:
+            x=0 #reset so I can see how long button was pressed
+            GPIO.output(17, True)
+            GPIO.output(22, True)
+            print('Both lights should be on')
+            while input_value == False:
+                input_value = GPIO.input(24)
+                print('Button 3 is still pressed')
+                print(x)
+                x+=1
+            x=3 #go to next state on next loop
+            
+        elif input_value == False and x == 3:
+            x=0 #reset so I can see how long button was pressed
+            GPIO.output(17, False)
+            GPIO.output(22, False)
+            print('All lights should be off')
             while input_value == False:
                 input_value = GPIO.input(24)
                 print('Button 3 is still pressed')
                 print(x)
                 x+=1
             print('The light should be off')
-            x=0
+            x=0 #reset so I know the lights are off
 
 
         #This code is just for blinky lights while button is pressed
