@@ -3,14 +3,14 @@ import time
 import pygame.mixer 
 from sys import exit
 
-GPIO.setmode(GPIO.BOARD)
-GPIO.setup(11, GPIO.OUT)
-GPIO.setup(12, GPIO.IN)
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(17, GPIO.OUT)
 GPIO.setup(18, GPIO.IN)
-GPIO.setup(22, GPIO.IN)
+GPIO.setup(24, GPIO.IN)
+GPIO.setup(25, GPIO.IN)
 x=0
 
-GPIO.output(11, False)
+GPIO.output(17, False)
 
 pygame.mixer.init(48000, -16, 1, 1024)
 
@@ -24,36 +24,14 @@ soundChannelC = pygame.mixer.Channel(3)
 
 try:
     while True:
-        # This code is for a button that needs to toggle on and off
-        input_value = GPIO.input(18)
-        if input_value == False and x == 0:
-            GPIO.output(11, True)
-            while input_value == False:
-                input_value = GPIO.input(18)
-                print('Button 3 is still pressed.')
-                print(x)
-                x +=1
-            print('The light should be on.')
-        elif input_value == False and x > 0:
-            x=0
-            GPIO.output(11, False)
-            print('The light should be off')
-            while input_value == False:
-                input_value = GPIO.input(18)
-                print('Button 3 is still pressed')
-                print(x)
-                x+=1
-            print('The light should be off')
-            x=0
-
-                
+        
         # This code is for a button that plays a sound and turns on a light
         # then turns the light off after it's done playing
-        input_value = GPIO.input(12)
+        input_value = GPIO.input(18)
         if input_value == False and x == 0:
-            GPIO.output(11, True)
+            GPIO.output(17, True)
             while input_value == False:
-                input_value = GPIO.input(12)
+                input_value = GPIO.input(18)
                 # print('Button 1 is still pressed.')
                 # print(x)
                 x+=1
@@ -61,19 +39,42 @@ try:
             soundChannelB.play(sndB)
             time.sleep(sndB.get_length())
             print('Sound is done, turn out the lights')
-            GPIO.output(11,False)
+            GPIO.output(17,False)
             x = 0
+            
+        # This code is for a button that needs to toggle on and off
+        input_value = GPIO.input(24)
+        if input_value == False and x == 0:
+            GPIO.output(17, True)
+            while input_value == False:
+                input_value = GPIO.input(24)
+                print('Button 3 is still pressed.')
+                print(x)
+                x +=1
+            print('The light should be on.')
+        elif input_value == False and x > 0:
+            x=0
+            GPIO.output(17, False)
+            print('The light should be off')
+            while input_value == False:
+                input_value = GPIO.input(24)
+                print('Button 3 is still pressed')
+                print(x)
+                x+=1
+            print('The light should be off')
+            x=0
+
 
         #This code is just for blinky lights while button is pressed
-        input_value = GPIO.input(22)
+        input_value = GPIO.input(25)
         if input_value == False:
             print('The light should be blinky.')
      	    soundChannelA.play(sndA)
             while input_value == False:
-                input_value = GPIO.input(22)
-                GPIO.output(11, True)
+                input_value = GPIO.input(25)
+                GPIO.output(17, True)
                 time.sleep(.1)
-                GPIO.output(11, False)
+                GPIO.output(17, False)
                 time.sleep(.1)
                 #print('Button 3 is still pressed.')
             soundChannelA.stop()                
@@ -81,13 +82,13 @@ try:
 
 
 except KeyboardInterrupt:
-        GPIO.output(11, True)
+        GPIO.output(17, True)
         time.sleep(.3)
-        GPIO.output(11, False)
+        GPIO.output(17, False)
         time.sleep(.1)
-        GPIO.output(11, True)
+        GPIO.output(17, True)
         time.sleep(.1)
-        GPIO.output(11, False)
+        GPIO.output(17, False)
         time.sleep(.3)
 
     
