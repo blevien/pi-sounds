@@ -16,12 +16,11 @@ pygame.mixer.init(48000, -16, 1, 1024)
 
 sndA = pygame.mixer.Sound("sounds/siren2.wav")
 sndB = pygame.mixer.Sound("sounds/cddyshack.wav")
-
-sndA.set_volume(1)
+sndC = pygame.mixer.Sound("sounds/train.wav")
 
 soundChannelA = pygame.mixer.Channel(1)
 soundChannelB = pygame.mixer.Channel(2)
-
+soundChannelC = pygame.mixer.Channel(3)
 
 try:
     while True:
