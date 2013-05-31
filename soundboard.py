@@ -100,6 +100,8 @@ try:
                 print(x)
                 x+=1
             print('All lights should be off')
+            print('Play Train Sound')
+            soundChannelC.play(sndC)
             x=0 #reset so I know the lights are off
 
 
