@@ -1,12 +1,14 @@
 pi-sounds
 =========
 
-TODO:
-        # Make re-usable functions for the different blinkys that take parameters such as Pin#, Light Pattern, Timing ???
-        # Prompt for multiple choice User Input to select the sound-set
-        # Use a rotary encoder to change the sounds played
-        # Make a standalone PCB with ribbon connector to Pi
-        # Make a cool enclosure with powered USB Hub and built-in speaker
+TODOs
+
+        - [] Clean up code into re-usable functions for the different blinkys that take parameters such as Pin#, Light Pattern, Timing ???
+        - [] Prompt for multiple choice User Input to select the sound-set
+        - [] Use a rotary encoder to change the sounds played
+        - [] Make a standalone PCB with ribbon connector to Pi
+        - [] Make a cool enclosure with powered USB Hub and built-in speaker
+
 
 Building a Soundboard for my Raspberry Pi with various blinkys
 
