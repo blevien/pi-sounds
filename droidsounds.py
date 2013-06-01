@@ -28,20 +28,20 @@ soundChannelA = pygame.mixer.Channel(1)
 soundChannelB = pygame.mixer.Channel(2)
 soundChannelC = pygame.mixer.Channel(3)
 
-
+#parse optional parameters fro Command Line
 parser = argparse.ArgumentParser()
-parser.add_argument("-c", help="Enter -c to use command line")
-args = parser.parse_args()
-
+parser.add_argument("-c", help="Enter -c to use command line", action="store_true")
+args = parser.parse_args() 
     
 #Loop through the program to continually test if buttons are high or low
 try:
     while True:
-        
-        if args:
+ 
+        if args.c:
             button = raw_input("Which Button would you like to simulate (1  |  2  |  3 )")
             print (button)
 
+	print ("Are you making it here?")
             
         # This code is for a button 1 that plays a sound and turns on a light
         # then turns the light off after it's done playing
@@ -52,7 +52,8 @@ try:
                 input_value = GPIO.input(18)
             print('The light should be on, here comes the sound.')
             soundChannelB.play(sndB)
-            time.sleep(sndB.get_length())
+            while pygame.mixer.get_busy():
+		GPIO.output(17,True)
             print('Sound is done, turn out the lights')
             GPIO.output(17,False)
             
@@ -86,8 +87,8 @@ try:
 
         if button == "2":
             print('The light should blink, and sound should play until the sound is done')
-            soundChannelAb.play(sndA)
-            while sndA.get_busy():
+            soundChannelA.play(sndA)
+            while pygame.mixer.get_busy():
                 input_value = GPIO.input(25)
                 GPIO.output(17, True)
                 GPIO.output(22, False)
