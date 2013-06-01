@@ -30,7 +30,7 @@ soundChannelC = pygame.mixer.Channel(3)
 
 
 parser = argparse.ArgumentParser()
-parser.add_argument("arg", type=int, help="Enter -c to use command line")
+parser.add_argument("-c", help="Enter -c to use command line")
 args = parser.parse_args()
 
     
@@ -38,8 +38,9 @@ args = parser.parse_args()
 try:
     while True:
         
-        if args.command:
+        if args:
             button = raw_input("Which Button would you like to simulate (1  |  2  |  3 )")
+            print (button)
 
             
         # This code is for a button 1 that plays a sound and turns on a light
