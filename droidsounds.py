@@ -30,7 +30,7 @@ soundChannelC = pygame.mixer.Channel(3)
 
 
 parser = argparse.ArgumentParser()
-parser.add_argument("-command", help="Enter -c to use command line")
+parser.add_argument("arg", type=int, help="Enter -c to use command line")
 args = parser.parse_args()
 
     
