@@ -45,7 +45,7 @@ try:
             
         # This code is for a button 1 that plays a sound and turns on a light
         # then turns the light off after it's done playing
-        input_value = GPIO.input(18) or button == 1
+        input_value = GPIO.input(18)
         if input_value == False:
             GPIO.output(17, True)
             while input_value == False:
@@ -56,9 +56,18 @@ try:
             print('Sound is done, turn out the lights')
             GPIO.output(17,False)
             
+        if button == 1:
+            GPIO.output(17, True)
+            print('The light should be on, here comes the sound.')
+            soundChannelB.play(sndB)
+            time.sleep(sndB.get_length())
+            print('Sound is done, turn out the lights')
+            GPIO.output(17,False)
+    
+            
         #This code is just for blinky lights while button 2 is pressed
         #Now with two alternating LEDs (Police Siren)
-        input_value = GPIO.input(25) or button == 2
+        input_value = GPIO.input(25)
         if input_value == False:
             print('The light should blink, and sound should play until you release the button')
             soundChannelA.play(sndA)
@@ -75,10 +84,26 @@ try:
             GPIO.output(22, False)
             print('Button released, lights and sound off')
 
+        if button == 2:
+            print('The light should blink, and sound should play until the sound is done')
+            soundChannelAb.play(sndA)
+            while sndA.get_busy():
+                input_value = GPIO.input(25)
+                GPIO.output(17, True)
+                GPIO.output(22, False)
+                time.sleep(.1)
+                GPIO.output(17, False)
+                GPIO.output(22, True)
+                time.sleep(.1)
+            GPIO.output(17, False)
+            GPIO.output(22, False)
+            print('Sounds done, lights and sound off')
+            
+            
 
                         
         # This code is for a button 3 that has 4 states: all off, light1, light 2, both
-        input_value = GPIO.input(24) or button == 3
+        input_value = GPIO.input(24)
         # state is  for telling me how long the button was pressed for debug, but can be removed for clarity
         state = 0
         if input_value == False and state == 0:
@@ -138,6 +163,69 @@ try:
                pattern = raw_input("Press n to go to the next pattern of this button")
                if pattern == "n":
                    state=0
+
+        if button == 3:
+                    state = 0
+        if input_value == False and state == 0:
+            GPIO.output(17, True)
+            while input_value == False:
+                input_value = GPIO.input(24)
+            print('Light 1 should be on.')
+            state = 1 # go to next state on next loop
+            if button == 3:
+               pattern = raw_input("Press n to go to the next pattern of this button")
+               if pattern == "n":
+                   state+=1
+               
+            
+            
+        elif input_value == False and state == 1:
+            GPIO.output(17, False)
+            GPIO.output(22, True)
+            while input_value == False:
+                input_value = GPIO.input(24)
+                print('Button 3 is still pressed')
+                print(x)
+                x+=1
+            print('Light 2 should be on')
+            state=2 #go to next state on next loop
+            if button == 3:
+               pattern = raw_input("Press n to go to the next pattern of this button")
+               if pattern == "n":
+                   state+=1
+                   
+        elif input_value == False and state == 2:
+            x=0 #reset so I can see how long button was pressed
+            GPIO.output(17, True)
+            GPIO.output(22, True)
+
+            while input_value == False:
+                input_value = GPIO.input(24)
+                print('Button 3 is still pressed')
+                print(x)
+                x+=1
+            print('Both lights should be on')
+            x=3 #go to next state on next loop
+            if button == 3:
+               pattern = raw_input("Press n to go to the next pattern of this button")
+               if pattern == "n":
+                   state+=1
+                               
+        elif input_value == False and state == 3:
+            GPIO.output(17, False)
+            GPIO.output(22, False)
+            while input_value == False:
+                input_value = GPIO.input(24)
+            print('All lights should be off')
+            print('Play Train Sound')
+            soundChannelC.play(sndC)
+            if button == 3:
+               pattern = raw_input("Press n to go to the next pattern of this button")
+               if pattern == "n":
+                   state=0
+
+
+
 
 
 except: 
