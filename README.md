@@ -1,6 +1,12 @@
 pi-sounds
 =========
 
+Overview
+  - soundboard.py takes input from 3 different buttons which each play a sound and blink 2 LEDs in different patterns.
+  - droidsounds.py is a modified version I use from an Android SSH app which takes a command line optional parameter -c to indicate that you would like to control the "buttons" via the command line which provides intrusctions at runtime
+ 
+
+
 TODOs
 
         - [] Clean up code into re-usable functions for the different blinkys that take parameters such as Pin#, Light Pattern, Timing ???
