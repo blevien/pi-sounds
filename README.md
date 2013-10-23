@@ -29,3 +29,7 @@ Building a Soundboard for my Raspberry Pi with various blinkys
 Breadboard
 
 ![Breadboard Layout](breadboard.jpg)
+
+Custom PCB
+
+![Front](PCB_Front.png) ![Back](PCB_Back.png)
