@@ -29,42 +29,43 @@
       <div class="inner clearfix">
         <section id="main-content">
           <h1>
-<a id="pi-sounds" class="anchor" href="#pi-sounds" aria-hidden="true"><span class="octicon octicon-link"></span></a>pi-sounds</h1>
-
-<p>Overview</p>
+<a id="description" class="anchor" href="#description" aria-hidden="true"><span class="octicon octicon-link"></span></a>Description</h1>
 
 <ul>
 <li>soundboard.py takes input from 3 different buttons which each play a sound and blink 2 LEDs in different patterns.</li>
 <li>droidsounds.py is a modified version I use from an Android SSH app which takes a command line optional parameter -c to indicate that you would like to control the "buttons" via the command line which provides intrusctions at runtime</li>
 </ul>
 
-<p>TODOs</p>
+<h1>
+<a id="overview" class="anchor" href="#overview" aria-hidden="true"><span class="octicon octicon-link"></span></a>Overview</h1>
 
-<pre><code>    - [] Clean up code into re-usable functions for the different blinkys that take parameters such as Pin#, Light Pattern, Timing ???
-    - [] Prompt for multiple choice User Input to select the sound-set
-    - [] Use a rotary encoder to change the sounds played
-    - [] Make a standalone PCB with ribbon connector to Pi
-    - [] Make a cool enclosure with powered USB Hub and built-in speaker
-</code></pre>
+<ul>
+<li>Input Pin 18 reads a pull-down button that plays a sound and turns on LED on output pin 17</li>
+<li>then turns the light on output pin 17 off after it's done playing</li>
+<li>Input Pin 24 reads a pull-down button that cycles through 4 states to toggle LED patternss on output pins 17 and 22: All Off, 17on/22off, 17off/22on, both on</li>
+<li>Input Pin 25 reads a pull-down button that turns on alternating flashing LEDs (like a siren) on pins 17 and 22 and plays a sound ONLY while button is pressed then stops the sound and turns off the lights when released</li>
+</ul>
 
-<p>Building a Soundboard for my Raspberry Pi with various blinkys</p>
+<h1>
+<a id="todos" class="anchor" href="#todos" aria-hidden="true"><span class="octicon octicon-link"></span></a>TODOs</h1>
 
-<pre><code>    # Input Pin 18 reads a pull-down button that plays a sound and turns on LED on output pin 17
-    # then turns the light on output pin 17 off after it's done playing
+<ul>
+<li>Clean up code into re-usable functions for the different blinkys that take parameters such as Pin#, Light Pattern, Timing</li>
+<li>Prompt for multiple choice User Input to select the sound-set</li>
+<li>Use a rotary encoder to change the sounds played</li>
+<li>Make a standalone PCB with ribbon connector to Pi</li>
+<li>Make a cool enclosure with powered USB Hub and built-in speaker</li>
+</ul>
 
-    # Input Pin 24 reads a pull-down button that cycles through 4 states to toggle LED patternss on output pins 17 and 22: All Off, 17on/22off, 17off/22on, both on
+<h1>
+<a id="breadboard" class="anchor" href="#breadboard" aria-hidden="true"><span class="octicon octicon-link"></span></a>Breadboard</h1>
 
-    # Input Pin 25 reads a pull-down button that turns on alternating flashing LEDs (like a siren) on pins 17 and 22 and plays a sound ONLY while button is pressed
-    # then stops the sound and turns off the lights when released
-</code></pre>
+<p><img src="https://github.com/blevien/pi-sounds/raw/master/breadboard.jpg" alt="Breadboard Layout"></p>
 
-<p>Breadboard</p>
+<h1>
+<a id="custom-pcb" class="anchor" href="#custom-pcb" aria-hidden="true"><span class="octicon octicon-link"></span></a>Custom PCB</h1>
 
-<p><img src="breadboard.jpg" alt="Breadboard Layout"></p>
-
-<p>Custom PCB</p>
-
-<p><img src="PCB_Front.png" alt="Front"> <img src="PCB_Back.png" alt="Back"></p>
+<p><img src="https://github.com/blevien/pi-sounds/raw/master/PCB_Front.png" alt="Front"> <img src="https://github.com/blevien/pi-sounds/raw/master/PCB_Back.png" alt="Back"></p>
         </section>
 
         <aside id="sidebar">
